@@ -19,9 +19,20 @@ const data = {
 	},
 }
 
+let subscribers = []
+
+export function subscribe(newSubscriber) {
+	subscribers.push(newSubscriber)
+}
+
+function notify() {
+	subscribers.forEach((subscriber) => subscriber())
+}
+
 function deleteTask(taskId) {
 	const { tasks } = data.todolist
 	data.todolist.tasks = tasks.filter((t) => t.id !== taskId)
+	notify()
 }
 
 function addTask(taskTitle) {
@@ -30,4 +41,5 @@ function addTask(taskTitle) {
 		title: taskTitle,
 	}
 	data.todolist.tasks.push(newTask)
+	notify()
 }
