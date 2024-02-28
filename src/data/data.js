@@ -18,3 +18,16 @@ const data = {
 		],
 	},
 }
+
+function deleteTask(taskId) {
+	const { tasks } = data.todolist
+	data.todolist.tasks = tasks.filter((t) => t.id !== taskId)
+}
+
+function addTask(taskTitle) {
+	const newTask = {
+		id: crypto.randomUUID(),
+		title: taskTitle,
+	}
+	data.todolist.tasks.push(newTask)
+}
